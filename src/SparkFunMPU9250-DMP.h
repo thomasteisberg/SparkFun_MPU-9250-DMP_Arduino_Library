@@ -374,7 +374,10 @@ public:
 	//         Bit pos 1: accel
 	//         Bit pos 2: mag
 	int selfTest(unsigned char debug = 0);
-	
+
+  unsigned short readReg(unsigned short addr);
+  inv_error_t setConfig(unsigned char data);
+
 private:
 	unsigned short _aSense;
 	float _gSense, _mSense;

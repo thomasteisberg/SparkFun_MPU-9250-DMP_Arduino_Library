@@ -1309,6 +1309,25 @@ int mpu_set_lpf(unsigned short lpf)
 }
 
 /**
+ * Set raw value of config register
+ *  @brief      Set CONFIG register (LPF)
+ *  @param[in]  data Desired CONFIG register dat
+ *  @return     0 if successful.
+ */
+int mpu_set_lpf_raw(unsigned char data)
+{
+    if (!(st.chip_cfg.sensors))
+        return -1;
+
+    if (st.chip_cfg.lpf == data)
+        return 0;
+    if (i2c_write(st.hw->addr, st.reg->lpf, 1, &data))
+        return -1;
+    st.chip_cfg.lpf = data;
+    return 0;
+}
+
+/**
  *  @brief      Get sampling rate.
  *  @param[out] rate    Current sampling rate (Hz).
  *  @return     0 if successful.

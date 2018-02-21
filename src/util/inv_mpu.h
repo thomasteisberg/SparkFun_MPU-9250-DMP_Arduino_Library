@@ -77,6 +77,8 @@ int mpu_get_dmp_state(unsigned char *enabled);
 int mpu_get_lpf(unsigned short *lpf);
 int mpu_set_lpf(unsigned short lpf);
 
+int mpu_set_lpf_raw(unsigned char data);
+
 int mpu_get_gyro_fsr(unsigned short *fsr);
 int mpu_set_gyro_fsr(unsigned short fsr);
 

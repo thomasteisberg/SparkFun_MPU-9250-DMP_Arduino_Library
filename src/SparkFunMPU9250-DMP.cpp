@@ -159,6 +159,11 @@ unsigned short MPU9250_DMP::getLPF(void)
 	return 0;
 }
 
+inv_error_t MPU9250_DMP::setConfig(unsigned char data)
+{
+       return mpu_set_lpf_raw(data);
+}
+
 inv_error_t MPU9250_DMP::setSampleRate(unsigned short rate)
 {
     return mpu_set_sample_rate(rate);
@@ -688,6 +693,16 @@ unsigned short MPU9250_DMP::orientation_row_2_scale(const signed char *row)
     else
         b = 7;		// error
     return b;
+}
+
+unsigned short MPU9250_DMP::readReg(unsigned short addr)
+{
+    unsigned char data;
+
+    if (mpu_read_reg(addr, &data) != INV_SUCCESS)
+        return 0;
+
+    return data;
 }
 		
 static void tap_cb(unsigned char direction, unsigned char count)
